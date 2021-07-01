@@ -9,6 +9,32 @@ class Video {
   private final String title;
   private final String videoId;
   private final List<String> tags;
+  private boolean flagged;
+  private String flag_reason;
+
+  public String getFlag_reason() {
+    return "(reason: " + flag_reason + ")";
+  }
+
+  public void setFlag_reason(String flag_reason) {
+    this.flag_reason = flag_reason;
+  }
+
+  public boolean isFlagged() {
+    return flagged;
+  }
+
+  public void setFlagged(boolean flagged) {
+    this.flagged = flagged;
+  }
+
+  String getFlag_info(){
+    return title + " (reason: " + flag_reason + ")";
+  }
+
+  String getFull_info(){
+    return getInfo() + " - FLAGGED " + getFlag_reason();
+  }
 
   Video(String title, String videoId, List<String> tags) {
     this.title = title;
@@ -29,5 +55,10 @@ class Video {
   /** Returns a readonly collection of the tags of the video. */
   List<String> getTags() {
     return tags;
+  }
+
+  String getInfo() {
+    String info = title + " (" + videoId + ") " + tags;
+    return info.replaceAll(",", "");
   }
 }
